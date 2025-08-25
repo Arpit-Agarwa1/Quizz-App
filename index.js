@@ -66,6 +66,7 @@ function initialize() {
 let condition = "true";
 
 function quizStart() {
+  console.log(condition);
   if (count <= 0) {
     if (questionNumber >= data.length - 1) {
       clearInterval(countdown);
@@ -73,12 +74,14 @@ function quizStart() {
       quiz.style.display = "none";
       score.style.display = "block";
       points.innerText = marks;
+      flag();
       answerKey();
     } else {
       flag();
       count = 5;
 
       questionNumber++;
+
       resetColor();
       displayQuestion();
       Options();

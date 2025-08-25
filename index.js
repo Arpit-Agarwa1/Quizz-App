@@ -63,6 +63,8 @@ function initialize() {
   countdown = setInterval(quizStart, 1000);
 }
 
+let condition = "true";
+
 function quizStart() {
   if (count <= 0) {
     if (questionNumber >= data.length - 1) {
@@ -73,7 +75,9 @@ function quizStart() {
       points.innerText = marks;
       answerKey();
     } else {
+      flag();
       count = 5;
+
       questionNumber++;
       resetColor();
       displayQuestion();
@@ -85,7 +89,16 @@ function quizStart() {
   }
 }
 
+function flag() {
+  if (condition === "false") {
+    correctAnswers.push("choose the option");
+    console.log(correctAnswers);
+  }
+  condition === "false";
+}
+
 function displayQuestion() {
+  condition = "false";
   questions.innerText = "";
   if (typeof data[questionNumber].question == "object") {
     let images = document.createElement("img");
@@ -132,6 +145,8 @@ let marks = 0;
 
 function lockOption(e) {
   e.target.style.color = "red";
+
+  condition = "true";
 
   if (e.target.style.color == "red") {
     bunch.style.pointerEvents = "none";

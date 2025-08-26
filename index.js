@@ -45,12 +45,15 @@ let score = document.querySelector(".score");
 let points = document.querySelector(".score-points");
 
 let count = 5;
-let questionNumber = 0;
+let qArry = [];
+
+let questionNumber;
 
 quiz.style.display = "none";
 score.style.display = "none";
 
 button.addEventListener("click", initialize);
+
 let countdown;
 
 function initialize() {
@@ -66,7 +69,6 @@ function initialize() {
 let condition = "true";
 
 function quizStart() {
-  console.log(condition);
   if (count <= 0) {
     if (questionNumber >= data.length - 1) {
       clearInterval(countdown);
@@ -80,7 +82,9 @@ function quizStart() {
       flag();
       count = 5;
 
-      questionNumber++;
+      // questionNumber++;
+
+      randomNumber();
 
       resetColor();
       displayQuestion();
@@ -165,6 +169,11 @@ function lockOption(e) {
     correctAnswers.push(e.target.innerText);
     console.log(correctAnswers, marks);
   }
+}
+
+function randomNumber() {
+  questionNumber = Math.floor(Math.random() * (data.length + 1));
+  console.log(questionNumber);
 }
 
 function answerKey() {

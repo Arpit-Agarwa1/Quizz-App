@@ -46,9 +46,28 @@ let points = document.querySelector(".score-points");
 
 let count = 5;
 let qArry = [];
-
+let questionIndex = 0;
 let questionNumber;
 
+//
+
+randomNumber();
+
+function randomNumber() {
+  while (qArry.length < data.length) {
+    let temp = getARandomValue();
+    if (!qArry.includes(temp)) {
+      qArry.push(temp);
+    }
+  }
+  console.log(qArry);
+}
+
+function getARandomValue() {
+  return Math.floor(Math.random() * data.length);
+}
+
+//
 quiz.style.display = "none";
 score.style.display = "none";
 
@@ -59,6 +78,10 @@ let countdown;
 function initialize() {
   button.style.display = "none";
   quiz.style.display = "block";
+
+  questionIndex = 0;
+  questionNumber = qArry[questionIndex];
+
   displayQuestion();
   Options();
   tikTik();
@@ -70,7 +93,7 @@ let condition = "true";
 
 function quizStart() {
   if (count <= 0) {
-    if (questionNumber >= data.length - 1) {
+    if (questionIndex >= data.length - 1) {
       clearInterval(countdown);
 
       quiz.style.display = "none";
@@ -82,9 +105,8 @@ function quizStart() {
       flag();
       count = 5;
 
-      // questionNumber++;
-
-      randomNumber();
+      questionIndex++;
+      questionNumber = qArry[questionIndex];
 
       resetColor();
       displayQuestion();
@@ -171,10 +193,10 @@ function lockOption(e) {
   }
 }
 
-function randomNumber() {
-  questionNumber = Math.floor(Math.random() * (data.length + 1));
-  console.log(questionNumber);
-}
+// function randomNumber() {
+//   questionNumber = Math.floor(Math.random() * (data.length + 1));
+//   console.log(questionNumber);
+// }
 
 function answerKey() {
   for (let i = 0; i < data.length; i++) {
